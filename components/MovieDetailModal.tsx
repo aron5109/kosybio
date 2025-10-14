@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Movie, Screening } from '../types';
+import { Movie } from '../types';
 import { CloseIcon, PlayIcon, TicketIcon, FacebookIcon, TwitterIcon } from './icons';
 
 interface MovieDetailModalProps {
@@ -7,18 +7,81 @@ interface MovieDetailModalProps {
   onClose: () => void;
 }
 
-const screenings: Screening[] = [
-  { time: '10:00', subtitles: 'ÍSL TEXTI' },
-  { time: '12:00', subtitles: 'ENS TEXTI' },
-  { time: '14:00', subtitles: 'ÍSL TEXTI' },
-];
+const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, onClose }) => {
+  const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // For this demo, we'll just show a success message.
+    // To connect to Google Sheets, you would typically use a Google Form submission URL
+    // or a backend service that writes to the sheet.
+    console.log(`Signing up with email: ${email} for movie: ${movie.title}`);
+    setIsSubmitted(true);
+  };
+
+  return (
+    <div className="absolute inset-0 bg-black bg-opacity-95 z-30 flex items-center justify-center p-4">
+      <div 
+        className="relative bg-white dark:bg-neutral-900 border-2 border-green-600 w-full max-w-md p-8 text-black dark:text-white"
+        onClick={e => e.stopPropagation()}
+      >
+        <button onClick={onClose} className="absolute top-4 right-4 text-black dark:text-white hover:text-red-500">
+          <CloseIcon />
+        </button>
+        
+        {!isSubmitted ? (
+          <>
+            <h2 className="font-orbitron text-2xl text-center font-bold uppercase text-green-500 mb-4">Skráning á {movie.title}</h2>
+            <p className="text-center text-sm text-neutral-600 dark:text-neutral-300 mb-6">
+              Skráðu þig til að eiga möguleika á jólaglaðning. Dregið verður út klukkan 15:30, 10. október. Sér jólapottur er fyrir hverja sýningu og þarf að skrá sig á allar sýningarnar til að eiga þátt í öllum pottunum!
+            </p>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2" htmlFor="email">
+                  Netfang
+                </label>
+                <input 
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-neutral-100 dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-700 p-3 text-black dark:text-white focus:outline-none focus:border-green-500 transition-colors"
+                  placeholder="nafn@netfang.is"
+                  required
+                />
+              </div>
+              <button 
+                type="submit"
+                className="w-full bg-green-600 text-white font-bold uppercase tracking-wider py-3 px-6 border-2 border-green-600 hover:bg-transparent hover:text-green-500 transition-all duration-300"
+              >
+                Staðfesta skráningu
+              </button>
+            </form>
+          </>
+        ) : (
+          <div className="text-center">
+            <h3 className="text-2xl font-bold mb-4">Takk fyrir!</h3>
+            <p className="text-neutral-600 dark:text-neutral-300 mb-6">
+              Þú hefur verið skráð(ur) á sýninguna á "{movie.title}". Gangi þér vel í jólapottinum!
+            </p>
+            <button 
+              onClick={onClose}
+              className="w-full bg-red-600 text-white font-bold uppercase tracking-wider py-3 px-8 border-2 border-red-600 hover:bg-transparent hover:text-red-500 transition-all duration-300"
+            >
+              Loka
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 
 const MovieDetailModal: React.FC<MovieDetailModalProps> = ({ movie, onClose }) => {
   const [showTrailer, setShowTrailer] = useState(false);
-
-  const handleBuyTicket = (time: string) => {
-    alert(`Sýndarmiðinn þinn fyrir "${movie.title}" klukkan ${time} hefur verið bókaður! Gleðileg jól!`);
-  };
+  const [showSignup, setShowSignup] = useState(false);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4" onClick={onClose}>
@@ -26,6 +89,8 @@ const MovieDetailModal: React.FC<MovieDetailModalProps> = ({ movie, onClose }) =
         className="relative bg-white dark:bg-neutral-900 text-black dark:text-white w-full max-w-6xl max-h-[90vh] overflow-y-auto"
         onClick={e => e.stopPropagation()}
       >
+        {showSignup && <SignupModal movie={movie} onClose={() => setShowSignup(false)} />}
+        
         <button onClick={onClose} className="absolute top-4 right-4 text-black dark:text-white hover:text-red-500 z-20">
           <CloseIcon size={32} />
         </button>
@@ -62,21 +127,20 @@ const MovieDetailModal: React.FC<MovieDetailModalProps> = ({ movie, onClose }) =
 
           <div className="lg:col-span-2 bg-neutral-100 dark:bg-neutral-800 p-6 md:p-8">
             <div className="box nextShows">
-              <h3 className="text-2xl font-bold text-red-500 mb-4 uppercase tracking-wider">Sýningartímar</h3>
+              <h3 className="text-2xl font-bold text-red-500 mb-2 uppercase tracking-wider">Sýningartími</h3>
+              <p className="text-lg font-semibold text-black dark:text-white mb-4">10. október</p>
               <ul>
-                {screenings.map(screening => (
-                  <li key={screening.time} className="mb-2 group">
+                  <li className="mb-2 group">
                      <div className='flex items-center justify-between bg-neutral-200 dark:bg-neutral-700 overflow-hidden'>
                         <div className='p-3'>
-                            <div className='font-bold text-lg'>{screening.time}</div>
-                            <div className='text-xs text-neutral-500 dark:text-neutral-400'>{screening.subtitles}</div>
+                            <div className='font-bold text-lg'>{movie.screeningTime}</div>
+                            <div className='text-xs text-neutral-500 dark:text-neutral-400'>{movie.subtitles}</div>
                         </div>
-                        <button onClick={() => handleBuyTicket(screening.time)} className='bg-green-600 text-white px-6 h-full flex items-center gap-2 font-bold uppercase tracking-wider transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300'>
-                            KAUPA <TicketIcon />
+                        <button onClick={() => setShowSignup(true)} className='bg-green-600 text-white px-4 h-full flex items-center gap-2 font-bold uppercase tracking-wider transform translate-x-0 transition-transform duration-300 text-center text-sm'>
+                            Skrá mig á sýningu
                         </button>
                      </div>
                   </li>
-                ))}
               </ul>
             </div>
 

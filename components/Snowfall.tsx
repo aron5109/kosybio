@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Snowfall: React.FC = () => {
+interface SnowfallProps {
+  isVisible: boolean;
+}
+
+const Snowfall: React.FC<SnowfallProps> = ({ isVisible }) => {
   // Create an array of snowflakes to be rendered.
   // The number of snowflakes can be adjusted here.
   const snowflakeCount = 150;
@@ -59,7 +63,7 @@ const Snowfall: React.FC = () => {
           animation-iteration-count: infinite, infinite;
         }
       `}</style>
-      <div aria-hidden="true">
+      <div aria-hidden="true" className={!isVisible ? 'hidden' : ''}>
         {snowflakes}
       </div>
     </>

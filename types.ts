@@ -5,9 +5,7 @@ export enum Genre {
     Family = 'Fjölskyldumyndir',
     Comedy = 'Gamanmyndir',
     Adventure = 'Ævintýramyndir',
-    Action = 'Spennumyndir',
     Drama = 'Dramamyndir',
-    Fantasy = 'Fantasíumyndir',
 }
   
 export interface Movie {
@@ -24,6 +22,7 @@ export interface Movie {
     duration: string;
     language: string;
     subtitles: string;
+    screeningTime: string;
 }
 
 export interface Screening {

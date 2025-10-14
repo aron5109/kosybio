@@ -13,7 +13,7 @@ const initialLogos = [
 ];
 
 const Footer: React.FC<FooterProps> = ({ isAdmin }) => {
-  const [footerText, setFooterText] = useState("Kósístofan is a digital-first cinema experience dedicated to the art of film. We celebrate storytelling in all its forms. All rights reserved.");
+  const [footerText, setFooterText] = useState("Kósýbíó is a digital-first cinema experience dedicated to the art of film. We celebrate storytelling in all its forms. All rights reserved.");
   const [isEditing, setIsEditing] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ const Footer: React.FC<FooterProps> = ({ isAdmin }) => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
-            <h3 className="font-orbitron text-2xl font-bold text-red-500 uppercase">Kósístofan</h3>
+            <h3 className="font-orbitron text-2xl font-bold text-red-500 uppercase">Kósýbíó</h3>
             <div className="relative mt-4">
               {isEditing ? (
                 <textarea 
@@ -65,7 +65,7 @@ const Footer: React.FC<FooterProps> = ({ isAdmin }) => {
           </div>
         </div>
         <div className="text-center text-xs mt-12 border-t border-neutral-200 dark:border-neutral-700 pt-6">
-          &copy; {new Date().getFullYear()} Kósístofan Virtual Cinema. Project for fun.
+          &copy; {new Date().getFullYear()} Kósýbíó Virtual Cinema. Project for fun.
         </div>
       </div>
     </footer>

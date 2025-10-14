@@ -14,7 +14,7 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onClose, onLogin }) =
     e.preventDefault();
     // In a real app, this would be an API call.
     // Here, we just use hardcoded credentials.
-    if (username === 'admin' && password === 'password') {
+    if (username === 'admin' && password === 'moþ2025') {
       onLogin(true);
     } else {
       onLogin(false);
@@ -55,7 +55,7 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onClose, onLogin }) =
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-neutral-100 dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-700 p-3 text-black dark:text-white focus:outline-none focus:border-red-500 transition-colors"
-              placeholder="password"
+              placeholder="moþ2025"
             />
           </div>
           <button 

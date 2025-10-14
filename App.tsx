@@ -7,24 +7,25 @@ import About from './components/About';
 import Footer from './components/Footer';
 import MovieDetailModal from './components/MovieDetailModal';
 import AdminLoginModal from './components/AdminLoginModal';
-import Snowfall from './components/Snowfall'; // Import the new Snowfall component
+import Snowfall from './components/Snowfall';
 import { Movie, Genre } from './types';
 
 // Data for the Hero section movie
 const heroMovie: Movie = {
-  id: 'grinch',
-  title: 'How the Grinch Stole Christmas',
-  posterUrl: 'https://www.originalfilmart.com/cdn/shop/products/grinch_2000_teaser_original_film_art_5000x.jpg?v=1635892741',
-  heroImageUrl: 'https://www.hollywoodreporter.com/wp-content/uploads/2021/12/How-the-Grinch-Stole-Christmas-Everett-MSDDRSE_UV005-H-2021.jpg',
-  trailerUrl: 'https://www.youtube.com/embed/DD0m9t4WHEQ',
-  genres: [Genre.Family, Genre.Comedy, Genre.Christmas, Genre.Fantasy],
-  synopsis: 'Í hinum duttlungafulla bæ Hver-bæ búa hinir kátu Hverjir sig undir jólin. En fyrir ofan bæinn trónir hinn gremjulegi, græni Grettir, sem hefur óbeit á hátíðinni og ætlar sér að stela henni frá þeim.',
-  year: 2000,
-  director: 'Ron Howard',
-  cast: ['Jim Carrey', 'Taylor Momsen', 'Jeffrey Tambor'],
-  duration: '104 min',
+  id: 'holiday',
+  title: 'The Holiday',
+  posterUrl: 'https://image.tmdb.org/t/p/w500/m3sQdCWoM0d2urht3mvW2f65bVI.jpg',
+  heroImageUrl: 'https://image.tmdb.org/t/p/original/1pI0r3qt22I4Ao2u4j2C41nIthw.jpg',
+  trailerUrl: 'https://www.youtube.com/embed/BDi5zH18vxU',
+  genres: [Genre.Comedy, Genre.Drama, Genre.Christmas],
+  synopsis: 'Tvær konur, önnur frá Ameríku og hin frá Bretlandi, skipta á heimilum yfir jólin eftir að hafa lent í slæmum sambandsslitum. Báðar finna þær óvænt ástina með heimamanni en uppgötva fljótt að endir frísins gæti sett strik í reikninginn.',
+  year: 2006,
+  director: 'Nancy Meyers',
+  cast: ['Kate Winslet', 'Cameron Diaz', 'Jude Law'],
+  duration: '136 min',
   language: 'English',
-  subtitles: 'Icelandic'
+  subtitles: 'Icelandic',
+  screeningTime: '10:00'
 };
 
 // Data for the movies displayed in the grid
@@ -41,7 +42,8 @@ const gridMovies: Movie[] = [
     cast: ['Chevy Chase', 'Beverly D\'Angelo', 'Juliette Lewis'],
     duration: '97 min',
     language: 'English',
-    subtitles: 'Icelandic'
+    subtitles: 'Icelandic',
+    screeningTime: '12:00'
   },
   {
     id: 'homealone',
@@ -55,21 +57,8 @@ const gridMovies: Movie[] = [
     cast: ['Macaulay Culkin', 'Joe Pesci', 'Daniel Stern'],
     duration: '103 min',
     language: 'English',
-    subtitles: 'Icelandic'
-  },
-  {
-    id: 'stuartlittle',
-    title: 'Stuart Little',
-    posterUrl: 'https://image.tmdb.org/t/p/w500/pIuQ2S2gY2mqr439TQAqgYI228g.jpg',
-    trailerUrl: 'https://www.youtube.com/embed/lP_NsoAd3i4',
-    genres: [Genre.Family, Genre.Adventure, Genre.Comedy, Genre.Fantasy],
-    synopsis: 'Little-fjölskyldan ættleiðir heillandi unga mús að nafni Stuart, en heimiliskötturinn, Snowbell, er ekki hrifinn af honum og vill hann burt úr húsinu.',
-    year: 1999,
-    director: 'Rob Minkoff',
-    cast: ['Michael J. Fox', 'Geena Davis', 'Hugh Laurie'],
-    duration: '84 min',
-    language: 'English',
-    subtitles: 'Icelandic'
+    subtitles: 'Icelandic',
+    screeningTime: '10:00'
   },
 ];
 
@@ -119,7 +108,7 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-white dark:bg-black text-black dark:text-white">
-      {isSnowing && <Snowfall />}
+      <Snowfall isVisible={isSnowing} />
       <Header 
         isMenuOpen={isMenuOpen}
         onMenuClick={() => setIsMenuOpen(!isMenuOpen)}
