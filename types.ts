@@ -14,6 +14,7 @@ export interface Movie {
     id: string;
     title: string;
     posterUrl: string;
+    heroImageUrl?: string;
     trailerUrl: string;
     genres: Genre[];
     synopsis: string;

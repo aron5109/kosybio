@@ -7,11 +7,13 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ movie, onSelectMovie }) => {
+  const backgroundImageUrl = movie.heroImageUrl || movie.posterUrl;
+  
   return (
     <section className="relative h-screen flex items-center justify-center text-center text-white pt-16">
       <div 
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${movie.posterUrl})` }}
+        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
       </div>

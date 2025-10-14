@@ -9,29 +9,46 @@ import MovieDetailModal from './components/MovieDetailModal';
 import AdminLoginModal from './components/AdminLoginModal';
 import { Movie, Genre } from './types';
 
-// Mock data for Christmas movies
-const mockMovies: Movie[] = [
+// Data for the Hero section movie
+const heroMovie: Movie = {
+  id: 'grinch',
+  title: 'How the Grinch Stole Christmas',
+  posterUrl: 'https://image.tmdb.org/t/p/w500/1XDDXPXGiI8id7MrkTO3DSLp2tc.jpg',
+  heroImageUrl: 'https://www.hollywoodreporter.com/wp-content/uploads/2021/12/How-the-Grinch-Stole-Christmas-Everett-MSDDRSE_UV005-H-2021.jpg',
+  trailerUrl: 'https://www.youtube.com/embed/DD0m9t4WHEQ',
+  genres: [Genre.Family, Genre.Comedy, Genre.Christmas, Genre.Fantasy],
+  synopsis: 'Í hinum duttlungafulla bæ Hver-bæ búa hinir kátu Hverjir sig undir jólin. En fyrir ofan bæinn trónir hinn gremjulegi, græni Grettir, sem hefur óbeit á hátíðinni og ætlar sér að stela henni frá þeim.',
+  year: 2000,
+  director: 'Ron Howard',
+  cast: ['Jim Carrey', 'Taylor Momsen', 'Jeffrey Tambor'],
+  duration: '104 min',
+  language: 'English',
+  subtitles: 'Icelandic'
+};
+
+// Data for the movies displayed in the grid
+const gridMovies: Movie[] = [
   {
-    id: '1',
-    title: 'Die Hard',
-    posterUrl: 'https://image.tmdb.org/t/p/w500/yFihWxQcmqcaBR31R6vcz3V2ehb.jpg',
-    trailerUrl: 'https://www.youtube.com/embed/jaJuwKCmJbY',
-    genres: [Genre.Action, Genre.Christmas],
-    synopsis: 'An NYPD officer tries to save his wife and several others taken hostage by German terrorists during a Christmas party at the Nakatomi Plaza in Los Angeles.',
-    year: 1988,
-    director: 'John McTiernan',
-    cast: ['Bruce Willis', 'Alan Rickman', 'Bonnie Bedelia'],
-    duration: '132 min',
+    id: 'vacation',
+    title: 'National Lampoon\'s Christmas Vacation',
+    posterUrl: 'https://image.tmdb.org/t/p/w500/b0j5s94Vd3fXyLd2w2R2alv1s3x.jpg',
+    trailerUrl: 'https://www.youtube.com/embed/NBTTipJX-h4',
+    genres: [Genre.Comedy, Genre.Christmas],
+    synopsis: 'Áætlanir Griswold-fjölskyldunnar um stór fjölskyldujól breytast fyrirsjáanlega í stórslys.',
+    year: 1989,
+    director: 'Jeremiah S. Chechik',
+    cast: ['Chevy Chase', 'Beverly D\'Angelo', 'Juliette Lewis'],
+    duration: '97 min',
     language: 'English',
     subtitles: 'Icelandic'
   },
   {
-    id: '2',
+    id: 'homealone',
     title: 'Home Alone',
     posterUrl: 'https://image.tmdb.org/t/p/w500/uVwQ0QeXy0iC2hJsoag2ceh5Mv2.jpg',
     trailerUrl: 'https://www.youtube.com/embed/jEDaVHmw7r4',
     genres: [Genre.Comedy, Genre.Family, Genre.Christmas],
-    synopsis: 'An eight-year-old troublemaker must protect his house from a pair of burglars when he is accidentally left home alone by his family during Christmas vacation.',
+    synopsis: 'Átta ára stríðnispúki þarf að verja hús sitt fyrir innbrotsþjófum þegar hann er óvart skilinn eftir einn heima af fjölskyldu sinni yfir jólin.',
     year: 1990,
     director: 'Chris Columbus',
     cast: ['Macaulay Culkin', 'Joe Pesci', 'Daniel Stern'],
@@ -40,62 +57,21 @@ const mockMovies: Movie[] = [
     subtitles: 'Icelandic'
   },
   {
-    id: '3',
-    title: 'The Grinch (2018)',
-    posterUrl: 'https://image.tmdb.org/t/p/w500/1g84UaPgMev06gJNYs1nLpcJiuw.jpg',
-    trailerUrl: 'https://www.youtube.com/embed/Bf6D-i8YpHg',
-    genres: [Genre.Family, Genre.Comedy, Genre.Christmas, Genre.Fantasy],
-    synopsis: 'A cynical grump goes on a mission to steal Christmas, only to have his heart changed by a young girl’s generous holiday spirit.',
-    year: 2018,
-    director: 'Scott Mosier, Yarrow Cheney',
-    cast: ['Benedict Cumberbatch', 'Cameron Seely', 'Rashida Jones'],
-    duration: '85 min',
+    id: 'stuartlittle',
+    title: 'Stuart Little',
+    posterUrl: 'https://image.tmdb.org/t/p/w500/pIuQ2S2gY2mqr439TQAqgYI228g.jpg',
+    trailerUrl: 'https://www.youtube.com/embed/lP_NsoAd3i4',
+    genres: [Genre.Family, Genre.Adventure, Genre.Comedy, Genre.Fantasy],
+    synopsis: 'Little-fjölskyldan ættleiðir heillandi unga mús að nafni Stuart, en heimiliskötturinn, Snowbell, er ekki hrifinn af honum og vill hann burt úr húsinu.',
+    year: 1999,
+    director: 'Rob Minkoff',
+    cast: ['Michael J. Fox', 'Geena Davis', 'Hugh Laurie'],
+    duration: '84 min',
     language: 'English',
     subtitles: 'Icelandic'
-  },
-  {
-    id: '4',
-    title: 'Klaus',
-    posterUrl: 'https://image.tmdb.org/t/p/w500/q3k1Pj5M5y6sA4i82Tsc1c1kRfq.jpg',
-    trailerUrl: 'https://www.youtube.com/embed/taE3PwurhYM',
-    genres: [Genre.Family, Genre.Adventure, Genre.Christmas, Genre.Comedy],
-    synopsis: 'A simple act of kindness always sparks another, even in a frozen, faraway place. When Smeerensburg\'s new postman, Jesper, befriends toymaker Klaus, their gifts melt an age-old feud and deliver a sleigh full of holiday traditions.',
-    year: 2019,
-    director: 'Sergio Pablos',
-    cast: ['Jason Schwartzman', 'J.K. Simmons', 'Rashida Jones'],
-    duration: '96 min',
-    language: 'English',
-    subtitles: 'Icelandic'
-  },
-  {
-    id: '5',
-    title: 'Elf',
-    posterUrl: 'https://image.tmdb.org/t/p/w500/zDHF2KkMyb8Wd91b3V8p6x1I4kS.jpg',
-    trailerUrl: 'https://www.youtube.com/embed/a54yC1etmVc',
-    genres: [Genre.Comedy, Genre.Family, Genre.Christmas, Genre.Fantasy],
-    synopsis: 'After discovering he is a human, a man raised as an elf at the North Pole decides to travel to New York City to locate his real father.',
-    year: 2003,
-    director: 'Jon Favreau',
-    cast: ['Will Ferrell', 'James Caan', 'Zooey Deschanel'],
-    duration: '97 min',
-    language: 'English',
-    subtitles: 'Icelandic'
-  },
-  {
-    id: '6',
-    title: 'The Nightmare Before Christmas',
-    posterUrl: 'https://image.tmdb.org/t/p/w500/o3uF2A7I2d2QWOq4K8fG6kOq3a.jpg',
-    trailerUrl: 'https://www.youtube.com/embed/wr6N_hZyBCk',
-    genres: [Genre.Family, Genre.Fantasy, Genre.Christmas],
-    synopsis: 'Jack Skellington, king of Halloween Town, discovers Christmas Town, but his attempts to bring Christmas to his home causes confusion.',
-    year: 1993,
-    director: 'Henry Selick',
-    cast: ['Danny Elfman', 'Chris Sarandon', 'Catherine O\'Hara'],
-    duration: '76 min',
-    language: 'English',
-    subtitles: 'Icelandic',
   },
 ];
+
 
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -156,8 +132,8 @@ const App: React.FC = () => {
         toggleTheme={toggleTheme}
       />
       <main>
-        <Hero movie={mockMovies[0]} onSelectMovie={handleSelectMovie} />
-        <MovieGrid movies={mockMovies} onSelectMovie={handleSelectMovie} isAdmin={isAdmin} />
+        <Hero movie={heroMovie} onSelectMovie={handleSelectMovie} />
+        <MovieGrid movies={gridMovies} onSelectMovie={handleSelectMovie} isAdmin={isAdmin} />
         <About ref={aboutRef} />
       </main>
       <Footer isAdmin={isAdmin} />
