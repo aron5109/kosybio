@@ -25,29 +25,35 @@ const Snowfall: React.FC = () => {
   return (
     <>
       <style>{`
-        /* Keyframe animation for the falling motion */
+        /* Keyframe animation for the falling motion (using 'top' to avoid transform conflict) */
         @keyframes fall {
-          from { transform: translateY(-10vh); }
-          to { transform: translateY(110vh); }
+          to {
+            top: 110vh;
+          }
         }
 
         /* Keyframe animation for the side-to-side swaying motion */
         @keyframes sway {
-          0%, 100% { transform: translateX(0); }
-          50% { transform: translateX(40px); }
+          0%, 100% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(40px);
+          }
         }
 
         /* Base styles for each snowflake */
         .snowflake {
           position: fixed;
-          top: 0;
+          /* Start snowflakes above the viewport */
+          top: -10vh;
           background: white;
           border-radius: 50%;
           /* Prevent snowflakes from interfering with mouse events */
           pointer-events: none;
           /* Ensure snowflakes are above the background but below other UI elements */
           z-index: 10;
-          /* Apply both animations */
+          /* Apply both animations. 'fall' controls 'top', 'sway' controls 'transform'. No conflict. */
           animation-name: fall, sway;
           animation-timing-function: linear, ease-in-out;
           animation-iteration-count: infinite, infinite;
