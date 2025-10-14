@@ -1,28 +1,31 @@
-
+// Fix: Replaced placeholder content with actual type definitions.
 export enum Genre {
-  All = "Allt",
-  SciFi = "Vísindaskáldskapur",
-  Festive = "Hátíðlegt",
-  Action = "Spenna",
-  Thriller = "Spennutryllir",
+    All = 'Allar myndir',
+    Christmas = 'Jólamyndir',
+    Family = 'Fjölskyldumyndir',
+    Comedy = 'Gamanmyndir',
+    Adventure = 'Ævintýramyndir',
+    Action = 'Spennumyndir',
+    Drama = 'Dramamyndir',
+    Fantasy = 'Fantasíumyndir',
 }
-
+  
 export interface Movie {
-  id: number;
-  title: string;
-  posterUrl: string;
-  trailerUrl: string;
-  synopsis: string;
-  year: number;
-  duration: string;
-  director: string;
-  cast: string[];
-  language: string;
-  subtitles: string;
-  genres: Genre[];
+    id: string;
+    title: string;
+    posterUrl: string;
+    trailerUrl: string;
+    genres: Genre[];
+    synopsis: string;
+    year: number;
+    director: string;
+    cast: string[];
+    duration: string;
+    language: string;
+    subtitles: string;
 }
 
 export interface Screening {
-  time: string;
-  subtitles: string;
+    time: string;
+    subtitles: string;
 }
