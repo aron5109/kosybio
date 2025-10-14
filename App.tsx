@@ -14,8 +14,8 @@ import { Movie, Genre } from './types';
 const heroMovie: Movie = {
   id: 'holiday',
   title: 'The Holiday',
-  posterUrl: 'https://image.tmdb.org/t/p/w500/m3sQdCWoM0d2urht3mvW2f65bVI.jpg',
-  heroImageUrl: 'https://image.tmdb.org/t/p/original/1pI0r3qt22I4Ao2u4j2C41nIthw.jpg',
+  posterUrl: 'https://m.media-amazon.com/images/M/MV5BZmEwNDg0M2QtMDdiNy00YTliLTk4ZjctOThjZjczODVmMTdkXkEyXkFqcGc@._V1_.jpg',
+  heroImageUrl: 'https://awolvision.com/cdn/shop/articles/holiday-movie-night-projector-family.jpg',
   trailerUrl: 'https://www.youtube.com/embed/BDi5zH18vxU',
   genres: [Genre.Comedy, Genre.Drama, Genre.Christmas],
   synopsis: 'Tvær konur, önnur frá Ameríku og hin frá Bretlandi, skipta á heimilum yfir jólin eftir að hafa lent í slæmum sambandsslitum. Báðar finna þær óvænt ástina með heimamanni en uppgötva fljótt að endir frísins gæti sett strik í reikninginn.',
