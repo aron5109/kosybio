@@ -7,13 +7,14 @@ import About from './components/About';
 import Footer from './components/Footer';
 import MovieDetailModal from './components/MovieDetailModal';
 import AdminLoginModal from './components/AdminLoginModal';
+import Snowfall from './components/Snowfall'; // Import the new Snowfall component
 import { Movie, Genre } from './types';
 
 // Data for the Hero section movie
 const heroMovie: Movie = {
   id: 'grinch',
   title: 'How the Grinch Stole Christmas',
-  posterUrl: 'https://image.tmdb.org/t/p/w500/1XDDXPXGiI8id7MrkTO3DSLp2tc.jpg',
+  posterUrl: 'https://www.originalfilmart.com/cdn/shop/products/grinch_2000_teaser_original_film_art_5000x.jpg?v=1635892741',
   heroImageUrl: 'https://www.hollywoodreporter.com/wp-content/uploads/2021/12/How-the-Grinch-Stole-Christmas-Everett-MSDDRSE_UV005-H-2021.jpg',
   trailerUrl: 'https://www.youtube.com/embed/DD0m9t4WHEQ',
   genres: [Genre.Family, Genre.Comedy, Genre.Christmas, Genre.Fantasy],
@@ -31,7 +32,7 @@ const gridMovies: Movie[] = [
   {
     id: 'vacation',
     title: 'National Lampoon\'s Christmas Vacation',
-    posterUrl: 'https://image.tmdb.org/t/p/w500/b0j5s94Vd3fXyLd2w2R2alv1s3x.jpg',
+    posterUrl: 'https://www.originalfilmart.com/cdn/shop/products/NationalLampoon_sChristmasVacation_1989_linen_original_film_art_f_1600x.webp',
     trailerUrl: 'https://www.youtube.com/embed/NBTTipJX-h4',
     genres: [Genre.Comedy, Genre.Christmas],
     synopsis: 'Áætlanir Griswold-fjölskyldunnar um stór fjölskyldujól breytast fyrirsjáanlega í stórslys.',
@@ -45,7 +46,7 @@ const gridMovies: Movie[] = [
   {
     id: 'homealone',
     title: 'Home Alone',
-    posterUrl: 'https://image.tmdb.org/t/p/w500/uVwQ0QeXy0iC2hJsoag2ceh5Mv2.jpg',
+    posterUrl: 'https://www.originalfilmart.com/cdn/shop/products/HomeAlone_1990_original_film_art_5000x.jpg',
     trailerUrl: 'https://www.youtube.com/embed/jEDaVHmw7r4',
     genres: [Genre.Comedy, Genre.Family, Genre.Christmas],
     synopsis: 'Átta ára stríðnispúki þarf að verja hús sitt fyrir innbrotsþjófum þegar hann er óvart skilinn eftir einn heima af fjölskyldu sinni yfir jólin.',
@@ -72,21 +73,28 @@ const gridMovies: Movie[] = [
   },
 ];
 
+// Combine the hero movie with the other grid movies
+const allMoviesForGrid = [heroMovie, ...gridMovies];
+
 
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [theme, setTheme] = useState('dark');
+  // Initialize theme from localStorage to persist user's choice
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const aboutRef = useRef<HTMLDivElement>(null);
 
+  // Apply theme class to <html> and save choice to localStorage
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   }, [theme]);
 
@@ -123,6 +131,7 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-white dark:bg-black text-black dark:text-white">
+      <Snowfall />
       <Header 
         isMenuOpen={isMenuOpen}
         onMenuClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -133,7 +142,8 @@ const App: React.FC = () => {
       />
       <main>
         <Hero movie={heroMovie} onSelectMovie={handleSelectMovie} />
-        <MovieGrid movies={gridMovies} onSelectMovie={handleSelectMovie} isAdmin={isAdmin} />
+        <MovieGrid movies={allMoviesForGrid} onSelectMovie={handleSelectMovie} isAdmin={isAdmin} />
+        {/* Fix: Corrected ref passing syntax for forwardRef component. */}
         <About ref={aboutRef} />
       </main>
       <Footer isAdmin={isAdmin} />
