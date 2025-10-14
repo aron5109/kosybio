@@ -1,16 +1,16 @@
 import React from 'react';
-import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from './icons';
+import { CloseIcon, HamburgerIcon, SnowflakeIcon, SnowflakeOffIcon } from './icons';
 
 interface HeaderProps {
   isMenuOpen: boolean;
   onMenuClick: () => void;
   onScrollToAbout: () => void;
   onAdminLoginClick: () => void;
-  theme: string;
-  toggleTheme: () => void;
+  isSnowing: boolean;
+  toggleSnow: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isMenuOpen, onMenuClick, onScrollToAbout, onAdminLoginClick, theme, toggleTheme }) => {
+const Header: React.FC<HeaderProps> = ({ isMenuOpen, onMenuClick, onScrollToAbout, onAdminLoginClick, isSnowing, toggleSnow }) => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 bg-white/80 dark:bg-black/80 backdrop-blur-sm p-4 z-50">
@@ -21,13 +21,13 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, onMenuClick, onScrollToAbou
           <nav className="hidden md:flex space-x-6 items-center">
             <button onClick={onScrollToAbout} className="text-black dark:text-white hover:text-red-500 transition-colors uppercase font-semibold">Um</button>
             <button onClick={onAdminLoginClick} className="text-black dark:text-white hover:text-red-500 transition-colors uppercase font-semibold">Stjórnandi</button>
-            <button onClick={toggleTheme} className="text-black dark:text-white hover:text-red-500 transition-colors">
-              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+            <button onClick={toggleSnow} className="text-black dark:text-white hover:text-red-500 transition-colors">
+              {isSnowing ? <SnowflakeIcon /> : <SnowflakeOffIcon />}
             </button>
           </nav>
           <div className="md:hidden flex items-center gap-4">
-            <button onClick={toggleTheme} className="text-black dark:text-white">
-              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+            <button onClick={toggleSnow} className="text-black dark:text-white">
+              {isSnowing ? <SnowflakeIcon /> : <SnowflakeOffIcon />}
             </button>
             <button onClick={onMenuClick} className="text-black dark:text-white z-50">
               {isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}

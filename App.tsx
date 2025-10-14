@@ -79,27 +79,15 @@ const allMoviesForGrid = [heroMovie, ...gridMovies];
 
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // Initialize theme from localStorage to persist user's choice
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  const [isSnowing, setIsSnowing] = useState(true); // Snow is on by default
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const aboutRef = useRef<HTMLDivElement>(null);
 
-  // Apply theme class to <html> and save choice to localStorage
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+  const toggleSnow = () => {
+    setIsSnowing(prev => !prev);
   };
 
   const handleScrollToAbout = () => {
@@ -131,14 +119,14 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-white dark:bg-black text-black dark:text-white">
-      <Snowfall />
+      {isSnowing && <Snowfall />}
       <Header 
         isMenuOpen={isMenuOpen}
         onMenuClick={() => setIsMenuOpen(!isMenuOpen)}
         onScrollToAbout={handleScrollToAbout}
         onAdminLoginClick={handleAdminLoginClick}
-        theme={theme}
-        toggleTheme={toggleTheme}
+        isSnowing={isSnowing}
+        toggleSnow={toggleSnow}
       />
       <main>
         <Hero movie={heroMovie} onSelectMovie={handleSelectMovie} />
