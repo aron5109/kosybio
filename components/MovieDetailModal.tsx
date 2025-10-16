@@ -157,12 +157,9 @@ const MovieDetailModal: React.FC<MovieDetailModalProps> = ({ movie, onClose }) =
             </ul>
 
             <div className="mt-8">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                     <a href="#" className="flex items-center justify-center gap-2 bg-blue-600 text-white p-2 font-bold hover:bg-blue-700 transition-colors">
                         <FacebookIcon /> Facebook
-                    </a>
-                    <a href="#" className="flex items-center justify-center gap-2 bg-sky-500 text-white p-2 font-bold hover:bg-sky-600 transition-colors">
-                        <TwitterIcon /> Twitter
                     </a>
                 </div>
             </div>

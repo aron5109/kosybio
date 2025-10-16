@@ -74,6 +74,7 @@ const App: React.FC = () => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const aboutRef = useRef<HTMLDivElement>(null);
+  const movieGridRef = useRef<HTMLDivElement>(null);
 
   const toggleSnow = () => {
     setIsSnowing(prev => !prev);
@@ -82,6 +83,10 @@ const App: React.FC = () => {
   const handleScrollToAbout = () => {
     aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
+  };
+
+  const handleScrollToGrid = () => {
+    movieGridRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
   
   const handleSelectMovie = (movie: Movie) => {
@@ -118,8 +123,8 @@ const App: React.FC = () => {
         toggleSnow={toggleSnow}
       />
       <main>
-        <Hero movie={heroMovie} onSelectMovie={handleSelectMovie} />
-        <MovieGrid movies={allMoviesForGrid} onSelectMovie={handleSelectMovie} isAdmin={isAdmin} />
+        <Hero movie={heroMovie} onScrollToGrid={handleScrollToGrid} />
+        <MovieGrid ref={movieGridRef} movies={allMoviesForGrid} onSelectMovie={handleSelectMovie} isAdmin={isAdmin} />
         {/* Fix: Corrected ref passing syntax for forwardRef component. */}
         <About ref={aboutRef} />
       </main>

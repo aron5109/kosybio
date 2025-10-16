@@ -10,7 +10,7 @@ interface MovieGridProps {
 
 const allGenres = Object.values(Genre);
 
-const MovieGrid: React.FC<MovieGridProps> = ({ movies, onSelectMovie, isAdmin }) => {
+const MovieGrid = React.forwardRef<HTMLDivElement, MovieGridProps>(({ movies, onSelectMovie, isAdmin }, ref) => {
   const [activeGenre, setActiveGenre] = useState<Genre>(Genre.All);
 
   const filteredMovies = activeGenre === Genre.All 
@@ -18,7 +18,7 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, onSelectMovie, isAdmin })
     : movies.filter(movie => movie.genres.includes(activeGenre));
 
   return (
-    <section className="py-16 md:py-24 bg-neutral-100 dark:bg-neutral-900">
+    <section ref={ref} className="py-16 md:py-24 bg-neutral-100 dark:bg-neutral-900">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
           {allGenres.map(genre => (
@@ -43,6 +43,6 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, onSelectMovie, isAdmin })
       </div>
     </section>
   );
-};
+});
 
 export default MovieGrid;

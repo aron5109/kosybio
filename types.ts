@@ -4,7 +4,6 @@ export enum Genre {
     Christmas = 'Jólamyndir',
     Family = 'Fjölskyldumyndir',
     Comedy = 'Gamanmyndir',
-    Adventure = 'Ævintýramyndir',
     Drama = 'Dramamyndir',
 }
   

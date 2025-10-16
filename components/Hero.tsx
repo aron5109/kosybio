@@ -3,10 +3,10 @@ import { Movie } from '../types';
 
 interface HeroProps {
   movie: Movie;
-  onSelectMovie: (movie: Movie) => void;
+  onScrollToGrid: () => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ movie, onSelectMovie }) => {
+const Hero: React.FC<HeroProps> = ({ movie, onScrollToGrid }) => {
   const backgroundImageUrl = movie.heroImageUrl || movie.posterUrl;
   
   return (
@@ -26,7 +26,7 @@ const Hero: React.FC<HeroProps> = ({ movie, onSelectMovie }) => {
         </p>
         <div className="mt-8">
           <button
-            onClick={() => onSelectMovie(movie)}
+            onClick={onScrollToGrid}
             className="bg-green-600 text-white font-bold uppercase tracking-wider py-3 px-8 border-2 border-green-600 hover:bg-transparent hover:text-green-500 transition-all duration-300"
           >
             Skoða sýningar

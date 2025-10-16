@@ -16,7 +16,7 @@ const Footer: React.FC<FooterProps> = ({ isAdmin }) => {
           &copy; {new Date().getFullYear()} Kósýbíó. Allur réttur áskilinn.
         </p>
         <p className="text-xs mt-2">
-            Þessi vefsíða er sýnishorn og ekki raunverulegt bíó.
+          Þessi vefsíða er partur af Jólaþema Menningar- og þjónustusviðs. Engin réttur áskilin.
         </p>
         {isAdmin && (
             <p className="text-xs mt-4 p-2 bg-red-500/20 text-red-500 border border-red-500">
