@@ -13,10 +13,10 @@ const Footer: React.FC<FooterProps> = ({ isAdmin }) => {
           <span className="text-red-500">BÍÓ</span>
         </h2>
         <p className="text-sm">
-          &copy; {new Date().getFullYear()} Kósýbíó. Allur réttur áskilinn.
+          &copy; {new Date().getFullYear()} Kósýbíó. Engin réttur áskilinn :)
         </p>
         <p className="text-xs mt-2">
-          Þessi vefsíða er partur af Jólaþema Menningar- og þjónustusviðs. Engin réttur áskilin.
+          Þessi vefsíða er partur af Jólaþema Menningar- og þjónustusviðs.
         </p>
         {isAdmin && (
             <p className="text-xs mt-4 p-2 bg-red-500/20 text-red-500 border border-red-500">
