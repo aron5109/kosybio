@@ -34,7 +34,7 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          fullName: fullName,
+          name: fullName, // Breytt úr fullName til að passa við Apps Script
           movieTitle: movie.title,
           timestamp: new Date().toISOString(),
         }),

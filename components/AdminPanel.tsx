@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-const AdminPanel: React.FC = () => {
+interface AdminPanelProps {
+  onLogout: () => void;
+}
+
+const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
   const [url, setUrl] = useState('');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -59,6 +63,12 @@ const AdminPanel: React.FC = () => {
           {saveStatus === 'error' && (
             <p className="text-red-500 text-center font-semibold">Ógild slóð. Vinsamlegast athugaðu slóðina.</p>
           )}
+          <button
+            onClick={onLogout}
+            className="w-full bg-gray-600 text-white font-bold uppercase tracking-wider py-3 px-6 border-2 border-gray-600 hover:bg-transparent hover:text-gray-400 dark:hover:text-gray-400 transition-all duration-300"
+          >
+            Útskrá
+          </button>
         </div>
       </div>
     </section>

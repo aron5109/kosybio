@@ -112,6 +112,10 @@ const App: React.FC = () => {
     }
   };
 
+  const handleAdminLogout = () => {
+    setIsAdmin(false);
+  };
+
   return (
     <div className="bg-white dark:bg-black text-black dark:text-white">
       <Snowfall isVisible={isSnowing} />
@@ -122,11 +126,13 @@ const App: React.FC = () => {
         onAdminLoginClick={handleAdminLoginClick}
         isSnowing={isSnowing}
         toggleSnow={toggleSnow}
+        isAdmin={isAdmin}
+        onAdminLogoutClick={handleAdminLogout}
       />
       <main>
         <Hero movie={heroMovie} onScrollToGrid={handleScrollToGrid} />
         <MovieGrid ref={movieGridRef} movies={allMoviesForGrid} onSelectMovie={handleSelectMovie} isAdmin={isAdmin} />
-        {isAdmin && <AdminPanel />}
+        {isAdmin && <AdminPanel onLogout={handleAdminLogout} />}
         {/* Fix: Corrected ref passing syntax for forwardRef component. */}
         <About ref={aboutRef} />
       </main>
