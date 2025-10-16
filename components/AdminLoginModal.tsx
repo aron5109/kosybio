@@ -9,32 +9,37 @@ interface AdminLoginModalProps {
 const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onClose, onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would be an API call.
-    // Here, we just use hardcoded credentials.
-    if (username === 'admin' && password === 'moþ2025') {
+    setError('');
+
+    // Hardcoded credentials for demonstration purposes
+    if (username === 'admin' && password === 'password123') {
       onLogin(true);
     } else {
+      setError('N rangt notendanafn eða lykilorð.');
       onLogin(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div 
-        className="relative bg-white dark:bg-neutral-900 border-2 border-red-600 w-full max-w-md p-8 text-black dark:text-white"
+        className="relative bg-white dark:bg-neutral-900 border-2 border-red-500 w-full max-w-sm p-8 text-black dark:text-white"
         onClick={e => e.stopPropagation()}
       >
         <button onClick={onClose} className="absolute top-4 right-4 text-black dark:text-white hover:text-red-500">
           <CloseIcon />
         </button>
-        <h2 className="font-orbitron text-3xl text-center font-bold uppercase text-red-500 mb-6">Innskráning stjórnanda</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        
+        <h2 className="font-orbitron text-2xl text-center font-bold uppercase text-red-500 mb-6">Innskráning stjórnanda</h2>
+        
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2" htmlFor="username">
-              Notandanafn
+            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2" htmlFor="username">
+              Notendanafn
             </label>
             <input 
               type="text"
@@ -42,11 +47,11 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onClose, onLogin }) =
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full bg-neutral-100 dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-700 p-3 text-black dark:text-white focus:outline-none focus:border-red-500 transition-colors"
-              placeholder="admin"
+              required
             />
           </div>
           <div>
-            <label className="block text-sm font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2" htmlFor="password">
+            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2" htmlFor="password">
               Lykilorð
             </label>
             <input 
@@ -55,14 +60,17 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onClose, onLogin }) =
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-neutral-100 dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-700 p-3 text-black dark:text-white focus:outline-none focus:border-red-500 transition-colors"
-              placeholder="moþ2025"
+              required
             />
           </div>
+          
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+          
           <button 
             type="submit"
-            className="w-full bg-red-600 text-white font-bold uppercase tracking-wider py-3 px-8 border-2 border-red-600 hover:bg-transparent hover:text-red-500 transition-all duration-300"
+            className="w-full bg-red-600 text-white font-bold uppercase tracking-wider py-3 px-6 border-2 border-red-600 hover:bg-transparent hover:text-red-500 transition-all duration-300"
           >
-            Skrá inn
+            Innskrá
           </button>
         </form>
       </div>
