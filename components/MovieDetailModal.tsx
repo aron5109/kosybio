@@ -8,17 +8,51 @@ interface MovieDetailModalProps {
 }
 
 const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, onClose }) => {
-  const [email, setEmail] = useState('');
+  const [fullName, setFullName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // For this demo, we'll just show a success message.
-    // To connect to Google Sheets, you would typically use a Google Form submission URL
-    // or a backend service that writes to the sheet.
-    console.log(`Signing up with email: ${email} for movie: ${movie.title}`);
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setError('');
+
+    const sheetUrl = localStorage.getItem('googleSheetUrl');
+
+    if (!sheetUrl) {
+      setError('Stjórnandi hefur ekki sett upp skráningu. Vinsamlegast hafið samband.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(sheetUrl, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: fullName,
+          movieTitle: movie.title,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      setIsSubmitted(true);
+    } catch (e) {
+      console.error('Signup submission error:', e);
+      setError('Ekki tókst að senda skráningu. Vinsamlegast reynið aftur síðar.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
 
   return (
     <div className="absolute inset-0 bg-black bg-opacity-95 z-30 flex items-center justify-center p-4">
@@ -34,28 +68,30 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
           <>
             <h2 className="font-orbitron text-2xl text-center font-bold uppercase text-green-500 mb-4">Skráning á {movie.title}</h2>
             <p className="text-center text-sm text-neutral-600 dark:text-neutral-300 mb-6">
-              Skráðu þig til að eiga möguleika á jólaglaðning. Dregið verður út klukkan 15:30, 10. október. Sér jólapottur er fyrir hverja sýningu og þarf að skrá sig á allar sýningarnar til að eiga þátt í öllum pottunum!
+              Skráðu þig til að eiga möguleika á jólaglaðning. Dregið verður út klukkan 15:30, 10. október. Einn stór jólapottur er fyrir allar skráningar!
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2" htmlFor="email">
-                  Netfang
+                <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2" htmlFor="fullName">
+                  Fullt nafn
                 </label>
                 <input 
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  id="fullName"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
                   className="w-full bg-neutral-100 dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-700 p-3 text-black dark:text-white focus:outline-none focus:border-green-500 transition-colors"
-                  placeholder="nafn@netfang.is"
+                  placeholder="Jón Jónsson"
                   required
                 />
               </div>
+              {error && <p className="text-red-500 text-sm text-center">{error}</p>}
               <button 
                 type="submit"
-                className="w-full bg-green-600 text-white font-bold uppercase tracking-wider py-3 px-6 border-2 border-green-600 hover:bg-transparent hover:text-green-500 transition-all duration-300"
+                disabled={isSubmitting}
+                className="w-full bg-green-600 text-white font-bold uppercase tracking-wider py-3 px-6 border-2 border-green-600 hover:bg-transparent hover:text-green-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Staðfesta skráningu
+                {isSubmitting ? 'Sendir...' : 'Staðfesta skráningu'}
               </button>
             </form>
           </>
@@ -158,7 +194,7 @@ const MovieDetailModal: React.FC<MovieDetailModalProps> = ({ movie, onClose }) =
 
             <div className="mt-8">
                 <div className="grid grid-cols-1 gap-4">
-                    <a href="#" className="flex items-center justify-center gap-2 bg-blue-600 text-white p-2 font-bold hover:bg-blue-700 transition-colors">
+                    <a href="http://facebook.com/reykjanesbaer.is/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-blue-600 text-white p-2 font-bold hover:bg-blue-700 transition-colors">
                         <FacebookIcon /> Facebook
                     </a>
                 </div>

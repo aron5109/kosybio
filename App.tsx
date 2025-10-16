@@ -7,6 +7,7 @@ import About from './components/About';
 import Footer from './components/Footer';
 import MovieDetailModal from './components/MovieDetailModal';
 import AdminLoginModal from './components/AdminLoginModal';
+import AdminPanel from './components/AdminPanel';
 import Snowfall from './components/Snowfall';
 import { Movie, Genre } from './types';
 
@@ -125,6 +126,7 @@ const App: React.FC = () => {
       <main>
         <Hero movie={heroMovie} onScrollToGrid={handleScrollToGrid} />
         <MovieGrid ref={movieGridRef} movies={allMoviesForGrid} onSelectMovie={handleSelectMovie} isAdmin={isAdmin} />
+        {isAdmin && <AdminPanel />}
         {/* Fix: Corrected ref passing syntax for forwardRef component. */}
         <About ref={aboutRef} />
       </main>
