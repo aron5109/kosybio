@@ -31,7 +31,7 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
         method: 'POST',
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'text/plain',
         },
         body: JSON.stringify({
           name: fullName, // Breytt úr fullName til að passa við Apps Script
