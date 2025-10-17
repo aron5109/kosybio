@@ -7,6 +7,8 @@ interface MovieDetailModalProps {
   onClose: () => void;
 }
 
+const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwKQAopDOkmibPqL6WwuJpUHAdmoqH_hejd97NE-uScXEjMUFU1AiSGAiXzuaB90ss-/exec';
+
 const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, onClose }) => {
   const [fullName, setFullName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -18,7 +20,7 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
     setIsSubmitting(true);
     setError('');
 
-    const sheetUrl = localStorage.getItem('googleSheetUrl');
+    const sheetUrl = localStorage.getItem('googleSheetUrl') || DEFAULT_SHEET_URL;
 
     if (!sheetUrl) {
       setError('Stjórnandi hefur ekki sett upp skráningu. Vinsamlegast hafið samband.');
@@ -27,17 +29,17 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
     }
 
     try {
+      // Use a simple delimited string for robustness instead of JSON
+      const DELIMITER = '|||';
+      const bodyPayload = `${fullName}${DELIMITER}${movie.title}`;
+
       const response = await fetch(sheetUrl, {
         method: 'POST',
         mode: 'cors',
         headers: {
           'Content-Type': 'text/plain',
         },
-        body: JSON.stringify({
-          name: fullName, // Breytt úr fullName til að passa við Apps Script
-          movieTitle: movie.title,
-          timestamp: new Date().toISOString(),
-        }),
+        body: bodyPayload,
       });
 
       if (!response.ok) {

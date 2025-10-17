@@ -5,20 +5,16 @@ interface AdminPanelProps {
   onHeroImageChange: (url: string) => void;
 }
 
+const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwKQAopDOkmibPqL6WwuJpUHAdmoqH_hejd97NE-uScXEjMUFU1AiSGAiXzuaB90ss-/exec';
+
 const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout, onHeroImageChange }) => {
   const [sheetUrl, setSheetUrl] = useState('');
   const [heroUrl, setHeroUrl] = useState('');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   useEffect(() => {
-    const storedSheetUrl = localStorage.getItem('googleSheetUrl');
-    if (storedSheetUrl) {
-      setSheetUrl(storedSheetUrl);
-    }
-    const storedHeroUrl = localStorage.getItem('heroImageUrl');
-    if (storedHeroUrl) {
-      setHeroUrl(storedHeroUrl);
-    }
+    setSheetUrl(localStorage.getItem('googleSheetUrl') || DEFAULT_SHEET_URL);
+    setHeroUrl(localStorage.getItem('heroImageUrl') || '');
   }, []);
 
   const handleSave = () => {
