@@ -12,7 +12,7 @@ import Snowfall from './components/Snowfall';
 import { Movie, Genre } from './types';
 
 // Data for the Hero section movie
-const heroMovie: Movie = {
+const initialHeroMovie: Movie = {
   id: 'holiday',
   title: 'The Holiday',
   posterUrl: 'https://m.media-amazon.com/images/M/MV5BZmEwNDg0M2QtMDdiNy00YTliLTk4ZjctOThjZjczODVmMTdkXkEyXkFqcGc@._V1_.jpg',
@@ -63,19 +63,35 @@ const gridMovies: Movie[] = [
   },
 ];
 
-// Combine the hero movie with the other grid movies
-const allMoviesForGrid = [heroMovie, ...gridMovies];
-
-
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSnowing, setIsSnowing] = useState(true); // Snow is on by default
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [heroMovie, setHeroMovie] = useState<Movie>(initialHeroMovie);
+
+  useEffect(() => {
+    const savedHeroUrl = localStorage.getItem('heroImageUrl');
+    if (savedHeroUrl) {
+      setHeroMovie(prevMovie => ({ ...prevMovie, heroImageUrl: savedHeroUrl }));
+    }
+  }, []);
 
   const aboutRef = useRef<HTMLDivElement>(null);
   const movieGridRef = useRef<HTMLDivElement>(null);
+  
+  // Combine the hero movie with the other grid movies
+  const allMoviesForGrid = [heroMovie, ...gridMovies];
+
+  const handleHeroImageChange = (url: string) => {
+    if (url) {
+      setHeroMovie(prev => ({ ...prev, heroImageUrl: url }));
+    } else {
+      // Revert to default if URL is empty
+      setHeroMovie(prev => ({ ...prev, heroImageUrl: initialHeroMovie.heroImageUrl }));
+    }
+  };
 
   const toggleSnow = () => {
     setIsSnowing(prev => !prev);
@@ -132,7 +148,7 @@ const App: React.FC = () => {
       <main>
         <Hero movie={heroMovie} onScrollToGrid={handleScrollToGrid} />
         <MovieGrid ref={movieGridRef} movies={allMoviesForGrid} onSelectMovie={handleSelectMovie} isAdmin={isAdmin} />
-        {isAdmin && <AdminPanel onLogout={handleAdminLogout} />}
+        {isAdmin && <AdminPanel onLogout={handleAdminLogout} onHeroImageChange={handleHeroImageChange} />}
         {/* Fix: Corrected ref passing syntax for forwardRef component. */}
         <About ref={aboutRef} />
       </main>
