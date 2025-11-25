@@ -70,7 +70,7 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
           <>
             <h2 className="font-orbitron text-2xl text-center font-bold uppercase text-green-500 mb-4">Skráning á {movie.title}</h2>
             <p className="text-center text-sm text-neutral-600 dark:text-neutral-300 mb-6">
-              Skráðu þig til að eiga möguleika á jólaglaðning. Dregið verður út klukkan 15:30, 10. október. Einn stór jólapottur er fyrir allar skráningar!
+              Skráðu þig til að eiga möguleika á jólaglaðning. Dregið verður út klukkan 15:30, 10. desember. Einn stór jólapottur er fyrir allar skráningar!
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -166,7 +166,7 @@ const MovieDetailModal: React.FC<MovieDetailModalProps> = ({ movie, onClose }) =
           <div className="lg:col-span-2 bg-neutral-100 dark:bg-neutral-800 p-6 md:p-8">
             <div className="box nextShows">
               <h3 className="text-2xl font-bold text-red-500 mb-2 uppercase tracking-wider">Sýningartími</h3>
-              <p className="text-lg font-semibold text-black dark:text-white mb-4">10. október</p>
+              <p className="text-lg font-semibold text-black dark:text-white mb-4">10. desember</p>
               <ul>
                   <li className="mb-2 group">
                      <div className='flex items-center justify-between bg-neutral-200 dark:bg-neutral-700 overflow-hidden'>
