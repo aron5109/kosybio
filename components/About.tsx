@@ -7,9 +7,18 @@ const About = React.forwardRef<HTMLDivElement>((props, ref) => {
         <h2 className="font-orbitron text-4xl md:text-5xl font-bold uppercase text-red-500 mb-6">
           Um Kósýbíó
         </h2>
-        <p className="text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
-          Velkomin í Kósýbíó, þína einstöku jólabíóupplifun. Við trúum á töfra kvikmyndanna og hlýju hátíðarinnar. Vandlega valið úrval okkar af kvikmyndum er hannað til að veita þér gleði, spennu og notalega hátíðartilfinningu. Gleymdu kuldanum úti, gríptu sýndarheitt kakó og komdu þér fyrir í kvikmyndaferðalagi sem á sér engan líka. Þetta er meira en bara bíó; þetta er jólahefð í mótun.
-        </p>
+        <div className="text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed flex flex-col gap-4">
+          <p>
+            Velkomin í Kósýbíó – notalega jólamyndastund sem Menningar- og þjónustusvið býður starfsfólki Reykjanesbæjar.
+            Markmiðið er einfalt: að gefa okkur tækifæri til að slaka aðeins á í jólaamstrinu og njóta skemmtilegrar mynd saman.
+          </p>
+          <p>
+            Við veljum myndirnar af natni til að skapa hlýja og létta stemmningu, þannig að þú getir sest niður, gleymt kuldanum úti og notið augnabliksins.
+          </p>
+          <p>
+            Kósýbíó er lítil jólagleði – og falleg leið fyrir okkur sem vinnum hjá sveitarfélaginu að njóta aðventunnar saman.
+          </p>
+        </div>
       </div>
     </section>
   );

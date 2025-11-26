@@ -184,7 +184,6 @@ const MovieDetailModal: React.FC<MovieDetailModalProps> = ({ movie, onClose }) =
                      <div className='flex items-center justify-between bg-neutral-200 dark:bg-neutral-700 overflow-hidden'>
                         <div className='p-3'>
                             <div className='font-bold text-lg'>{movie.screeningTime}</div>
-                            <div className='text-xs text-neutral-500 dark:text-neutral-400'>{movie.subtitles}</div>
                         </div>
                         <button onClick={() => setShowSignup(true)} className='bg-green-600 text-white px-4 h-full flex items-center gap-2 font-bold uppercase tracking-wider transform translate-x-0 transition-transform duration-300 text-center text-sm'>
                             Skrá mig á sýningu
