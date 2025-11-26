@@ -26,7 +26,7 @@ const initialHeroMovie: Movie = {
   duration: '136 min',
   language: 'English',
   subtitles: 'Icelandic',
-  screeningTime: '10:00'
+  screeningTime: '14:00'
 };
 
 // Data for the movies displayed in the grid
