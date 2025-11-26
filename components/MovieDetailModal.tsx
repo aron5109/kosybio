@@ -35,9 +35,11 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
 
       const response = await fetch(sheetUrl, {
         method: 'POST',
+        // explicit cors mode and follow redirect are important for GAS
         mode: 'cors',
+        redirect: 'follow',
         headers: {
-          'Content-Type': 'text/plain',
+          'Content-Type': 'text/plain;charset=utf-8',
         },
         body: bodyPayload,
       });
@@ -46,10 +48,17 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
         throw new Error('Network response was not ok');
       }
 
+      // Check the actual text response from the script
+      const result = await response.text();
+      if (!result.includes('Success')) {
+        throw new Error(result || 'Óþekkt villa kom upp hjá vefþjónustu');
+      }
+
       setIsSubmitted(true);
-    } catch (e) {
+    } catch (e: any) {
       console.error('Signup submission error:', e);
-      setError('Ekki tókst að senda skráningu. Vinsamlegast reynið aftur síðar.');
+      // Display the actual error message if available, which helps debugging GAS issues
+      setError(`Ekki tókst að senda skráningu: ${e.message || 'Villa í samskiptum'}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -87,7 +96,7 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
                   required
                 />
               </div>
-              {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+              {error && <p className="text-red-500 text-sm text-center font-semibold">{error}</p>}
               <button 
                 type="submit"
                 disabled={isSubmitting}

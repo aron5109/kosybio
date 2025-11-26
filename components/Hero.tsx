@@ -19,7 +19,7 @@ const Hero: React.FC<HeroProps> = ({ movie, onScrollToGrid }) => {
       </div>
       <div className="relative z-10 p-4 max-w-4xl mx-auto">
         <h2 className="font-orbitron text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-wider">
-          Kósýbíó <br /> 10 desember
+          Kósýbíó <br /> 10. desember
         </h2>
         <p className="mt-4 text-lg md:text-xl text-neutral-300">
           {movie.genres.join(' / ')}
