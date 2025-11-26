@@ -29,9 +29,11 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
     }
 
     try {
-      // Use a simple delimited string for robustness instead of JSON
-      const DELIMITER = '|||';
-      const bodyPayload = `${fullName}${DELIMITER}${movie.title}`;
+      // The server expects JSON, so we must stringify the payload
+      const bodyPayload = JSON.stringify({
+        name: fullName,
+        movie: movie.title
+      });
 
       const response = await fetch(sheetUrl, {
         method: 'POST',
@@ -50,8 +52,9 @@ const SignupModal: React.FC<{ movie: Movie; onClose: () => void }> = ({ movie, o
 
       // Check the actual text response from the script
       const result = await response.text();
-      if (!result.includes('Success')) {
-        throw new Error(result || 'Óþekkt villa kom upp hjá vefþjónustu');
+      // We accept 'Success' or a JSON response that isn't an error
+      if (result.includes('"result":"error"') || (result.startsWith('Error:'))) {
+         throw new Error(result);
       }
 
       setIsSubmitted(true);
