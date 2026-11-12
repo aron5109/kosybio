@@ -13,53 +13,53 @@ import { Movie, Genre } from './types';
 
 // Data for the Hero section movie
 const initialHeroMovie: Movie = {
-  id: 'holiday',
-  title: 'The Holiday',
-  posterUrl: 'https://m.media-amazon.com/images/M/MV5BZmEwNDg0M2QtMDdiNy00YTliLTk4ZjctOThjZjczODVmMTdkXkEyXkFqcGc@._V1_.jpg',
+  id: 'elf',
+  title: 'Elf',
+  posterUrl: 'elf.jpg',
   heroImageUrl: 'https://awolvision.com/cdn/shop/articles/holiday-movie-night-projector-family.jpg',
-  trailerUrl: 'https://www.youtube.com/embed/BDi5zH18vxU',
-  genres: [Genre.Comedy, Genre.Drama, Genre.Christmas],
-  synopsis: 'Tvær konur, önnur frá Ameríku og hin frá Bretlandi, skipta á heimilum yfir jólin eftir að hafa lent í slæmum sambandsslitum. Báðar finna þær óvænt ástina með heimamanni en uppgötva fljótt að endir frísins gæti sett strik í reikninginn.',
-  year: 2006,
-  director: 'Nancy Meyers',
-  cast: ['Kate Winslet', 'Cameron Diaz', 'Jude Law'],
-  duration: '136 min',
+  trailerUrl: 'https://www.youtube.com/embed/gW9wRNqQ_P8',
+  genres: [Genre.Comedy, Genre.Family, Genre.Christmas],
+  synopsis: 'Buddy ólst upp meðal álfa jólasveinsins á Norðurpólnum en kemst að því að hann er í raun maður. Hann heldur til New York í leit að föður sínum og breiðir út jólagleði hvert sem hann fer.',
+  year: 2003,
+  director: 'Jon Favreau',
+  cast: ['Will Ferrell', 'James Caan', 'Zooey Deschanel'],
+  duration: '97 min',
   language: 'English',
   subtitles: 'Icelandic',
-  screeningTime: '14:00'
+  screeningTime: '10:00'
 };
 
 // Data for the movies displayed in the grid
 const gridMovies: Movie[] = [
   {
-    id: 'vacation',
-    title: 'National Lampoon\'s Christmas Vacation',
-    posterUrl: 'https://www.originalfilmart.com/cdn/shop/products/NationalLampoon_sChristmasVacation_1989_linen_original_film_art_f_1600x.webp',
-    trailerUrl: 'https://www.youtube.com/embed/NBTTipJX-h4',
-    genres: [Genre.Comedy, Genre.Christmas],
-    synopsis: 'Áætlanir Griswold-fjölskyldunnar um stór fjölskyldujól breytast fyrirsjáanlega í stórslys.',
-    year: 1989,
-    director: 'Jeremiah S. Chechik',
-    cast: ['Chevy Chase', 'Beverly D\'Angelo', 'Juliette Lewis'],
-    duration: '97 min',
+    id: 'loveactually',
+    title: 'Love Actually',
+    posterUrl: 'love-actually.jpg',
+    trailerUrl: 'https://www.youtube.com/embed/H9Z3_ifFheQ',
+    genres: [Genre.Comedy, Genre.Drama, Genre.Christmas],
+    synopsis: 'Átta ólíkar ástarsögur fléttast saman í London vikurnar fyrir jól, þar sem ástin birtist í öllum sínum myndum – fyndin, sár og óvænt.',
+    year: 2003,
+    director: 'Richard Curtis',
+    cast: ['Hugh Grant', 'Emma Thompson', 'Liam Neeson'],
+    duration: '135 min',
     language: 'English',
     subtitles: 'Icelandic',
     screeningTime: '12:00'
   },
   {
-    id: 'homealone',
-    title: 'Home Alone',
-    posterUrl: 'https://www.originalfilmart.com/cdn/shop/products/HomeAlone_1990_original_film_art_5000x.jpg',
-    trailerUrl: 'https://www.youtube.com/embed/jEDaVHmw7r4',
-    genres: [Genre.Comedy, Genre.Family, Genre.Christmas],
-    synopsis: 'Átta ára stríðnispúki þarf að verja hús sitt fyrir innbrotsþjófum þegar hann er óvart skilinn eftir einn heima af fjölskyldu sinni yfir jólin.',
-    year: 1990,
-    director: 'Chris Columbus',
-    cast: ['Macaulay Culkin', 'Joe Pesci', 'Daniel Stern'],
-    duration: '103 min',
+    id: 'diehard',
+    title: 'Die Hard',
+    posterUrl: 'diehard1.jpg',
+    trailerUrl: 'https://www.youtube.com/embed/jaJuwKCmJbY',
+    genres: [Genre.Action, Genre.Christmas],
+    synopsis: 'Lögreglumaðurinn John McClane ætlar að sættast við eiginkonu sína í jólaboði í háhýsi í Los Angeles þegar hryðjuverkamenn taka gestina í gíslingu. Hann er sá eini sem getur stöðvað þá.',
+    year: 1988,
+    director: 'John McTiernan',
+    cast: ['Bruce Willis', 'Alan Rickman', 'Bonnie Bedelia'],
+    duration: '132 min',
     language: 'English',
     subtitles: 'Icelandic',
-    screeningTime: '10:00'
+    screeningTime: '14:00'
   },
 ];
 

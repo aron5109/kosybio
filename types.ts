@@ -5,6 +5,7 @@ export enum Genre {
     Family = 'Fjölskyldumyndir',
     Comedy = 'Gamanmyndir',
     Drama = 'Dramamyndir',
+    Action = 'Hasarmyndir',
 }
   
 export interface Movie {
